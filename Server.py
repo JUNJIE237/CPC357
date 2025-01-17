@@ -110,7 +110,7 @@ def on_message(client, userdata, message):
                 prediction_result = {"timestamp":datetime_obj, "topic": "health","data":prediction}
                 try:
                     # Insert the data into MongoDB
-                    collection.insert_one(document)
+                    collection.insert_one(prediction_result)
                     print("Prediction result ingested into MongoDB")
                 except Exception as e:
                     print(f"Error inserting prediction result into MongoDB: {e}")

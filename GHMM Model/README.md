@@ -13,9 +13,9 @@ These executables are command-line utilities provided by the mlpack library to p
 - Performing sequence predictions with trained HMMs (mlpack_hmm_generate).<br><br>
 
 #### Train an HMM Using mlpack_hmm_train <br>
-mlpack_hmm_train --input_file healthy_training_data.csv --output_model_file healthy_hmm.xml --type gaussian --states 1
+`mlpack_hmm_train --input_file healthy_training_data.csv --output_model_file healthy_hmm.xml --type gaussian --states 1`
 <br><br>
 
 #### Train an HMM Using mlpack_hmm_train<br>
-mlpack_hmm_train --input_file unhealthy_training_data.csv --output_model_file unhealthy_hmm.xml --type gaussian --states 1
+`mlpack_hmm_train --input_file unhealthy_training_data.csv --output_model_file unhealthy_hmm.xml --type gaussian --states 1`
 

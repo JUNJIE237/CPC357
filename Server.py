@@ -14,7 +14,7 @@ except pymongo.errors.ConnectionFailure as e:
 
 # MQTT configuration
 mqtt_broker_address = "34.60.18.131"
-mqtt_topics = [("iot/temperature", 0), ("iot/heartbeat", 0)]  # Topics with QoS level 0
+mqtt_topics = [("temperature", 0), ("heartbeat", 0)]  # Topics with QoS level 0
 
 # Define the callback function for connection
 def on_connect(client, userdata, flags, reason_code, properties):

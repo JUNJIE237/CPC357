@@ -84,8 +84,8 @@ void onWsEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventTyp
 
 
 const char* MQTT_SERVER = "34.60.18.131"; // Your VM instance public IP address
-const char* MQTT_TOPIC_temp = "iot/temperature"; // MQTT topic for subscription
-const char* MQTT_TOPIC_heartbeat = "iot/heartbeat"; // MQTT topic for subscription
+const char* MQTT_TOPIC_temp = "temperature"; // MQTT topic for subscription
+const char* MQTT_TOPIC_heartbeat = "heartbeat"; // MQTT topic for subscription
 const int MQTT_PORT = 1883; // Non-TLS communication port
 
 char buffer[128] = ""; // Text buffer
@@ -263,12 +263,12 @@ void loop() {
         rateSpot %= RATE_SIZE; // Wrap variable
         if (beatsPerMinute < 100 && beatsPerMinute > 70){
           digitalWrite(ledPinR, LOW); // Turn relay on
-          sprintf(buffer, "Hearbeat: %.2f", beatsPerMinute);
-          client.publish(MQTT_TOPIC_heartbeat, buffer);
+          //sprintf(buffer, "Hearbeat: %.2f", beatsPerMinute);
+          client.publish(MQTT_TOPIC_heartbeat, beatsPerMinute);
         }else{
           digitalWrite(ledPinR, HIGH);
-          sprintf(buffer, "Hearbeat: %.2f", beatsPerMinute);
-          client.publish(MQTT_TOPIC_heartbeat, buffer);
+          //sprintf(buffer, "Hearbeat: %.2f", beatsPerMinute);
+          //client.publish(MQTT_TOPIC_heartbeat, buffer);
           }
         
 
@@ -301,8 +301,8 @@ void loop() {
       Serial.print(h);
       Serial.println("%");
 
-      sprintf(buffer, "Temperature: %.2f degree Celsius", t);
-      client.publish(MQTT_TOPIC_temp, buffer);
+      //sprintf(buffer, "Temperature: %.2f degree Celsius", t);
+      client.publish(MQTT_TOPIC_temp, t);
 
       if (t > 30) {
           Serial.println("Relay ON: High temperature detected.");

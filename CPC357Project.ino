@@ -57,8 +57,8 @@ unsigned long inactivityStart = 0;
 //////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////WIFI THINGS//////////////////////////////////////////////
 // Wi-Fi credentials
-const char* ssid = "Accr";
-const char* password = "Twice520";
+const char* ssid = "CSLOUNGE666";
+const char* password = "ONLY4.0CANPASS";
 // WebSocket server
 AsyncWebServer server(80);
 AsyncWebSocket ws("/ws");
@@ -263,8 +263,8 @@ void loop() {
         rateSpot %= RATE_SIZE; // Wrap variable
         if (beatsPerMinute < 100 && beatsPerMinute > 70){
           digitalWrite(ledPinR, LOW); // Turn relay on
-          //sprintf(buffer, "Hearbeat: %.2f", beatsPerMinute);
-          client.publish(MQTT_TOPIC_heartbeat, beatsPerMinute);
+          //sprintf(buffer, "%.2f", beatsPerMinute);
+          client.publish(MQTT_TOPIC_heartbeat, String(beatsPerMinute).c_str());
         }else{
           digitalWrite(ledPinR, HIGH);
           //sprintf(buffer, "Hearbeat: %.2f", beatsPerMinute);
@@ -302,7 +302,7 @@ void loop() {
       Serial.println("%");
 
       //sprintf(buffer, "Temperature: %.2f degree Celsius", t);
-      client.publish(MQTT_TOPIC_temp, t);
+      client.publish(MQTT_TOPIC_temp, String(t).c_str());
 
       if (t > 30) {
           Serial.println("Relay ON: High temperature detected.");

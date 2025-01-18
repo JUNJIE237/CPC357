@@ -1,0 +1,39 @@
+version: '2'
+
+services:
+  charts:
+    build:
+      context: 'docker/charts'
+      args:
+        - EMAIL=admin@example.com
+        - PASSWORD=admin123
+    image: charts
+    network_mode: host
+    environment:
+      CHARTS_SUPPORT_WIDGET_AND_METRICS: 'on'
+      CHARTS_MONGODB_URI: 'mongodb://localhost:27017/admin?replicaSet=rs0'
+    volumes:
+      - keys:/mongodb-charts/volumes/keys
+      - logs:/mongodb-charts/volumes/logs
+      - db-certs:/mongodb-charts/volumes/db-certs
+      - web-certs:/mongodb-charts/volumes/web-certs
+    depends_on:
+      - mongo
+    container_name: charts
+
+  mongo:
+    hostname: localhost
+    build:
+      context: 'docker/mongo'
+    network_mode: host    
+    volumes:
+      - mongo:/data/db
+    image: charts_mongo
+    container_name: mongo
+
+volumes:
+  keys:
+  logs:
+  db-certs:
+  web-certs:
+  mongo:

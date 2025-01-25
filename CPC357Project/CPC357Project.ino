@@ -86,7 +86,17 @@ void onWsEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventTyp
 const char* MQTT_SERVER = "34.60.18.131"; // Your VM instance public IP address
 const char* MQTT_TOPIC_temp = "temperature"; // MQTT topic for subscription
 const char* MQTT_TOPIC_heartbeat = "heartbeat"; // MQTT topic for subscription
-const int MQTT_PORT = 1883; // Non-TLS communication port
+// const int MQTT_PORT = 1883; // Non-TLS communication port
+const int mqtt_port = 8883;
+const char* mqtt_username = "admin";
+const char* mqtt_password = "admin";
+
+// CA certificate (replace with the content of ~/certs/ca.crt)
+const char* root_ca = \
+    "-----BEGIN CERTIFICATE-----\r\n" \
+    "<CERTIFICATE-CONTENT>" \
+    "-----END CERTIFICATE-----\r\n";
+
 
 char buffer[128] = ""; // Text buffer
 char buffer2[128] = ""; // Text buffer
@@ -113,7 +123,7 @@ void reconnect() {
   {
     Serial.println("Attempting MQTT connection...");
 
-    if(client.connect("ESP32Client")) {
+    if(client.connect("ESP32Client", mqtt_username, mqtt_password)) {
       Serial.println("Connected to MQTT server");
     }
     else {
@@ -197,6 +207,10 @@ void setup() {
     Serial.println("\nConnected to Wi-Fi!");
     Serial.print("IP address: ");
     Serial.println(WiFi.localIP());
+
+    // Set up secure connection with MQTT broker
+    espClient.setCACert(root_ca);
+    client.setServer(mqtt_broker, mqtt_port);
 
     // WebSocket setup
     ws.onEvent(onWsEvent);

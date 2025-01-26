@@ -1,4 +1,4 @@
-##This is the extended modification to the original repository https://github.com/CrusaderX/mongodb-charts
+This is the extended modification to the original repository https://github.com/CrusaderX/mongodb-charts
 ---
 ## The changes made
 1. We change the docker-compose file , from mapping the port, to Host network mode

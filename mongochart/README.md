@@ -1,3 +1,10 @@
+#This is the extended modification to the original repository https://github.com/CrusaderX/mongodb-charts
+---
+## The changes made
+1. We change the docker-compose file , from mapping the port, to Host network mode
+2. We change the docker/chart/Dockerfile as the changes below
+   We change the image tag and remove the line apt-get update
+---
 In accordance with https://docs.mongodb.com/charts/master/launch-charts/#launch-charts this repo exist for whom who want to run this stuff locally with docker-compose.
 
 ```yaml
